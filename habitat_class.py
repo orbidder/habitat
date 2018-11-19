@@ -179,6 +179,7 @@ class_prediction = rf.predict(img_as_array)
 class_prediction = class_prediction.reshape(img[:, :, 0].shape)
 
 # now export your classificaiton (save as tif not bil)
-io.imsave('predicted_habitat.tif', class_prediction)
+pred_int = np.where(class_prediction == "Canyon", 1, np.where(class_prediction == "Meadow", 2, np.where(class_prediction == "Plain", 3, 999)))
+io.imsave('predicted_habitat.tif', pred_int)
 
 
